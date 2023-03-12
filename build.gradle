@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        dependency_management_plugin_version = '1.1.0'
+        spring_boot_version = '3.0.4'
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        mavenCentral()
+    }
+
+    dependencies {
+        // 一个提供类似 Maven 依赖管理功能的 Gradle 插件 https://plugins.gradle.org/plugin/io.spring.dependency-management
+        classpath "io.spring.gradle:dependency-management-plugin:$dependency_management_plugin_version"
+        // SpringBoot插件 https://plugins.gradle.org/plugin/org.springframework.boot
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+
+allprojects {
+    group 'com.crystalframework'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "java-library"
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "org.springframework.boot"
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:$spring_boot_version"
+        }
+    }
+
+}
+
+

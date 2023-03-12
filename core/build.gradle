@@ -1,0 +1,8 @@
+bootJar { enabled = false }
+
+dependencies {
+    implementation 'org.springframework:spring-core'
+    implementation 'org.springframework:spring-context'
+
+    implementation 'cn.hutool:hutool-all:5.8.15'
+}

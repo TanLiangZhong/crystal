@@ -1,0 +1,6 @@
+rootProject.name = 'crystal'
+include 'simple'
+include 'core'
+include 'simple-extend'
+include 'simple-open'
+
